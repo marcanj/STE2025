@@ -1,0 +1,467 @@
+<!doctype html>
+<html lang="ca">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Notes Examen</title>
+  <style>
+    :root{
+      --bg:#071a2b;
+      --card: rgba(255,255,255,0.08);
+      --card2: rgba(255,255,255,0.06);
+      --text:#e9f2ff;
+      --muted: rgba(233,242,255,0.72);
+      --accent:#58b7ff;
+      --accent2:#2e77ff;
+      --good:#39d98a;
+      --bad:#ff6b6b;
+      --border: rgba(255,255,255,0.14);
+      --shadow: 0 18px 50px rgba(0,0,0,0.35);
+      --radius: 18px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      color:var(--text);
+      background:
+        radial-gradient(1200px 700px at 10% -10%, rgba(88,183,255,0.35), transparent 60%),
+        radial-gradient(900px 600px at 90% 0%, rgba(46,119,255,0.35), transparent 55%),
+        radial-gradient(900px 700px at 50% 110%, rgba(88,183,255,0.18), transparent 55%),
+        linear-gradient(180deg, #061423 0%, #04101f 55%, #030c18 100%);
+      min-height:100vh;
+    }
+    header{
+      position:sticky; top:0; z-index:5;
+      backdrop-filter: blur(12px);
+      background: linear-gradient(180deg, rgba(3,12,24,0.88), rgba(3,12,24,0.55));
+      border-bottom: 1px solid var(--border);
+    }
+    .wrap{max-width: 980px; margin: 0 auto; padding: 18px 18px 28px;}
+    .brand{display:flex; align-items:center; gap:12px;}
+    .logo{
+      width:44px; height:44px; border-radius: 14px;
+      background: linear-gradient(135deg, rgba(88,183,255,0.95), rgba(46,119,255,0.9));
+      box-shadow: 0 12px 30px rgba(46,119,255,0.35);
+      position:relative; overflow:hidden;
+    }
+    .logo:before{
+      content:"";
+      position:absolute; inset:-20%;
+      background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.7), transparent 45%);
+      transform: rotate(20deg);
+    }
+    h1{
+      margin:0;
+      font-size: 1.05rem;
+      font-weight: 750;
+      line-height:1.15;
+      letter-spacing: 0.2px;
+    }
+    .subtitle{margin:0; color:var(--muted); font-size:0.9rem;}
+    main .card{
+      margin-top: 22px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.09), rgba(255,255,255,0.05));
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+    .card-inner{padding: 18px;}
+    .grid{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap: 14px;
+    }
+    @media (min-width: 840px){
+      .grid{grid-template-columns: 1.1fr 0.9fr;}
+    }
+    .hero{
+      padding: 18px;
+      border-radius: calc(var(--radius) - 4px);
+      background: radial-gradient(900px 400px at 10% 10%, rgba(88,183,255,0.22), transparent 60%),
+                  radial-gradient(900px 400px at 90% 0%, rgba(46,119,255,0.20), transparent 55%),
+                  rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.10);
+    }
+    .hero h2{margin:0 0 6px 0; font-size: 1.2rem; letter-spacing:0.2px;}
+    .hero p{margin:0; color:var(--muted); line-height:1.5;}
+    .form{
+      padding: 18px;
+      border-radius: calc(var(--radius) - 4px);
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.10);
+    }
+    label{display:block; font-weight:650; margin-bottom:8px; color: var(--text);}
+    input[type="text"]{
+      width:100%;
+      padding: 14px 14px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,0.16);
+      outline:none;
+      background: rgba(0,0,0,0.18);
+      color: var(--text);
+      font-size: 1rem;
+      letter-spacing: 0.2px;
+    }
+    input[type="text"]::placeholder{color: rgba(233,242,255,0.45);}
+    .btn{
+      margin-top: 12px;
+      display:inline-flex; align-items:center; justify-content:center;
+      gap:10px;
+      width:100%;
+      padding: 13px 14px;
+      border-radius: 14px;
+      border: none;
+      cursor:pointer;
+      font-weight: 750;
+      font-size: 1rem;
+      color: #061423;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      box-shadow: 0 14px 32px rgba(46,119,255,0.30);
+      transition: transform 120ms ease, filter 120ms ease;
+    }
+    .btn:hover{transform: translateY(-1px); filter: brightness(1.04);}
+    .btn:active{transform: translateY(0px); filter: brightness(0.98);}
+    .small{font-size:0.9rem; color:var(--muted);}
+    .pill{
+      display:inline-flex; align-items:center; gap:8px;
+      padding: 8px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.14);
+      background: rgba(255,255,255,0.05);
+      color: var(--muted);
+      font-size: 0.88rem;
+      width: fit-content;
+    }
+    .pill b{color:var(--text);}
+    .result-top{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px 12px;
+      align-items:center;
+      justify-content:space-between;
+      margin-bottom: 14px;
+    }
+    .student{font-weight: 850; font-size: 1.08rem;}
+    .grade{
+      font-weight: 900;
+      font-size: 1.1rem;
+      padding: 10px 12px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,0.14);
+      background: rgba(255,255,255,0.05);
+    }
+    .grade.good{color: var(--good);}
+    .grade.bad{color: var(--bad);}
+    .table{
+      width:100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      overflow:hidden;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.03);
+    }
+    .table th, .table td{
+      padding: 11px 12px;
+      border-bottom: 1px solid rgba(255,255,255,0.10);
+      vertical-align:top;
+    }
+    .table th{
+      text-align:left;
+      font-size: 0.92rem;
+      color: rgba(233,242,255,0.85);
+      background: rgba(255,255,255,0.05);
+      position: sticky;
+      top: 78px;
+      z-index: 2;
+    }
+    .table tr:last-child td{border-bottom:none;}
+    .muted{color: var(--muted);}
+    .right{text-align:right;}
+    .kpi{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin: 12px 0 16px;
+    }
+    .kpi .box{
+      padding: 12px;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.04);
+    }
+    .kpi .box .t{color: var(--muted); font-size: 0.86rem;}
+    .kpi .box .v{font-weight: 900; font-size: 1.05rem; margin-top: 4px;}
+    footer{padding: 16px 18px 26px; color: rgba(233,242,255,0.55); font-size:0.86rem; text-align:center;}
+    .hidden{display:none !important;}
+    .fade-in{animation: fadeIn 180ms ease-out both;}
+    @keyframes fadeIn{from{opacity:0; transform: translateY(6px);} to{opacity:1; transform: translateY(0px);}}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <div class="brand">
+        <div class="logo" aria-hidden="true"></div>
+        <div>
+          <h1>Notas Examen Re-evaluación<br>STE M4 2025/6 Q1</h1>
+          <p class="subtitle">Consulta personal de notes (DNI/NIE)</p>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <!-- VIEW: SEARCH -->
+    <section id="view-search" class="card fade-in">
+      <div class="card-inner">
+        <div class="grid">
+          <div class="hero">
+            <h2>Consulta les teves notes</h2>
+            <p>
+              Introdueix el teu <b>ID (DNI/NIE)</b> per veure la nota total i el desglossament per problemes i apartats.
+              <br><span class="small">Consell: no importa si la lletra final és en majúscula o minúscula.</span>
+            </p>
+            <div style="margin-top:14px" class="pill"><b>Màxim examen:</b> <span id="max-total"></span> punts</div>
+          </div>
+
+          <form class="form" id="search-form" autocomplete="off">
+            <label for="idInput">ID (DNI/NIE):</label>
+            <input id="idInput" type="text" placeholder="Escriu el teu DNI/NIE…" required />
+            <button class="btn" type="submit">Consultar</button>
+            <p class="small" style="margin-top:10px; margin-bottom:0;">
+              Les dades mostrades corresponen únicament a aquest examen.
+            </p>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- VIEW: RESULT -->
+    <section id="view-result" class="card hidden">
+      <div class="card-inner fade-in">
+        <div class="result-top">
+          <div class="student" id="student-title"></div>
+          <div class="grade" id="grade-pill"></div>
+        </div>
+
+        <div class="kpi">
+          <div class="box">
+            <div class="t">Nota examen re-evaluación</div>
+            <div class="v" id="kpi-total"></div>
+          </div>
+          <div class="box">
+            <div class="t">Estat</div>
+            <div class="v" id="kpi-status"></div>
+          </div>
+        </div>
+
+        <div class="pill" style="margin-bottom:12px;">
+          <b>Desglossament</b>
+          <span class="muted">— problemes i apartats</span>
+        </div>
+
+        <table class="table" aria-label="Desglossament de notes">
+          <thead>
+            <tr>
+              <th>Element</th>
+              <th class="right">Màx</th>
+              <th class="right">Obtingut</th>
+            </tr>
+          </thead>
+          <tbody id="breakdown-body"></tbody>
+        </table>
+
+        <div style="margin-top:14px;">
+          <button class="btn" id="new-search">Nova consulta</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- VIEW: NOT FOUND -->
+    <section id="view-notfound" class="card hidden">
+      <div class="card-inner fade-in">
+        <div class="hero" style="margin-bottom:14px;">
+          <h2>No s'ha trobat cap ID</h2>
+          <p>no s'ha trobat cap ID amb aquest DNI/NIE.</p>
+        </div>
+        <button class="btn" id="new-search-2">Nova consulta</button>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div>© STE M4 — Notes d'examen (consulta individual)</div>
+  </footer>
+
+  <script>
+    const DATA = {"title": "Notas Examen Re-evaluación<br>STE M4 2025/6 Q1", "maxByCol": {"1.1": 0.8, "1.2": 0.8, "1.3": 0.4, "2.1": 1.75, "2.2": 0.25, "2.3": 0.5, "2.4": 0.5, "3.1": 1.25, "3.2": 0.5, "3.3": 0.5, "3.4": 0.75, "4.1": 0.5, "4.2": 0.5, "4.3": 0.5, "4.4": 0.5}, "problemGroups": {"1": ["1.1", "1.2", "1.3"], "2": ["2.1", "2.2", "2.3", "2.4"], "3": ["3.1", "3.2", "3.3", "3.4"], "4": ["4.1", "4.2", "4.3", "4.4"]}, "maxProblem": {"1": 2.0, "2": 3.0, "3": 3.0, "4": 2.0}, "students": {"25370606l": {"1.1": 0.47, "1.2": 0.33, "1.3": 0.01, "2.1": 1.42, "2.2": 0.02, "2.3": 0.37, "2.4": 0.09, "3.1": 1.05, "3.2": 0.17, "3.3": 0.19, "3.4": 0.73, "4.1": 0.39, "4.2": 0.19, "4.3": 0.34, "4.4": 0.06, "TOTAL": 5.829999999999999}, "49322752b": {"1.1": 0.71, "1.2": 0.43, "1.3": 0.26, "2.1": 1.73, "2.2": 0.1, "2.3": 0.15, "2.4": 0.03, "3.1": 0.46, "3.2": 0.06, "3.3": 0.07, "3.4": 0.57, "4.1": 0.48, "4.2": 0.12, "4.3": 0.29, "4.4": 0.38, "TOTAL": 5.839999999999999}, "47864014w": {"1.1": 0.75, "1.2": 0.46, "1.3": 0.12, "2.1": 0.15, "2.2": 0.25, "2.3": 0.03, "2.4": 0.4, "3.1": 0.96, "3.2": 0.16, "3.3": 0.16, "3.4": 0.05, "4.1": 0.23, "4.2": 0.33, "4.3": 0.32, "4.4": 0.0, "TOTAL": 4.37}, "46280031y": {"1.1": 0.24, "1.2": 0.62, "1.3": 0.03, "2.1": 0.14, "2.2": 0.04, "2.3": 0.42, "2.4": 0.12, "3.1": 1.14, "3.2": 0.3, "3.3": 0.33, "3.4": 0.29, "4.1": 0.41, "4.2": 0.23, "4.3": 0.03, "4.4": 0.09, "TOTAL": 4.430000000000001}, "39419848x": {"1.1": 0.04, "1.2": 0.71, "1.3": 0.08, "2.1": 0.34, "2.2": 0.02, "2.3": 0.15, "2.4": 0.2, "3.1": 0.6, "3.2": 0.25, "3.3": 0.29, "3.4": 0.33, "4.1": 0.12, "4.2": 0.34, "4.3": 0.33, "4.4": 0.17, "TOTAL": 3.9699999999999998}, "24545561f": {"1.1": 0.63, "1.2": 0.72, "1.3": 0.37, "2.1": 0.96, "2.2": 0.0, "2.3": 0.11, "2.4": 0.21, "3.1": 0.33, "3.2": 0.5, "3.3": 0.48, "3.4": 0.46, "4.1": 0.34, "4.2": 0.2, "4.3": 0.32, "4.4": 0.14, "TOTAL": 5.7700000000000005}, "54616824n": {"1.1": 0.48, "1.2": 0.3, "1.3": 0.23, "2.1": 1.45, "2.2": 0.08, "2.3": 0.36, "2.4": 0.32, "3.1": 0.3, "3.2": 0.0, "3.3": 0.35, "3.4": 0.7, "4.1": 0.1, "4.2": 0.1, "4.3": 0.16, "4.4": 0.3, "TOTAL": 5.229999999999999}, "55277696w": {"1.1": 0.65, "1.2": 0.58, "1.3": 0.04, "2.1": 0.41, "2.2": 0.02, "2.3": 0.06, "2.4": 0.28, "3.1": 0.82, "3.2": 0.47, "3.3": 0.24, "3.4": 0.09, "4.1": 0.49, "4.2": 0.14, "4.3": 0.0, "4.4": 0.33, "TOTAL": 4.62}, "47959618h": {"1.1": 0.67, "1.2": 0.42, "1.3": 0.37, "2.1": 0.05, "2.2": 0.12, "2.3": 0.24, "2.4": 0.28, "3.1": 0.22, "3.2": 0.4, "3.3": 0.04, "3.4": 0.62, "4.1": 0.35, "4.2": 0.1, "4.3": 0.16, "4.4": 0.16, "TOTAL": 4.2}, "48064937c": {"1.1": 0.5, "1.2": 0.24, "1.3": 0.09, "2.1": 0.55, "2.2": 0.22, "2.3": 0.5, "2.4": 0.28, "3.1": 0.42, "3.2": 0.31, "3.3": 0.01, "3.4": 0.18, "4.1": 0.38, "4.2": 0.4, "4.3": 0.08, "4.4": 0.12, "TOTAL": 4.28}, "47262924v": {"1.1": 0.04, "1.2": 0.73, "1.3": 0.19, "2.1": 0.84, "2.2": 0.01, "2.3": 0.2, "2.4": 0.03, "3.1": 0.15, "3.2": 0.43, "3.3": 0.16, "3.4": 0.67, "4.1": 0.37, "4.2": 0.37, "4.3": 0.17, "4.4": 0.31, "TOTAL": 4.669999999999999}, "48219890e": {"1.1": 0.11, "1.2": 0.48, "1.3": 0.2, "2.1": 1.12, "2.2": 0.13, "2.3": 0.17, "2.4": 0.37, "3.1": 0.54, "3.2": 0.5, "3.3": 0.49, "3.4": 0.31, "4.1": 0.06, "4.2": 0.06, "4.3": 0.4, "4.4": 0.48, "TOTAL": 5.42}, "47950084y": {"1.1": 0.55, "1.2": 0.57, "1.3": 0.08, "2.1": 1.57, "2.2": 0.2, "2.3": 0.44, "2.4": 0.39, "3.1": 0.71, "3.2": 0.11, "3.3": 0.13, "3.4": 0.03, "4.1": 0.34, "4.2": 0.12, "4.3": 0.25, "4.4": 0.35, "TOTAL": 5.840000000000001}, "49321761d": {"1.1": 0.14, "1.2": 0.63, "1.3": 0.34, "2.1": 1.08, "2.2": 0.21, "2.3": 0.15, "2.4": 0.46, "3.1": 1.02, "3.2": 0.38, "3.3": 0.13, "3.4": 0.06, "4.1": 0.46, "4.2": 0.06, "4.3": 0.15, "4.4": 0.35, "TOTAL": 5.619999999999999}, "43570942h": {"1.1": 0.72, "1.2": 0.08, "1.3": 0.35, "2.1": 0.25, "2.2": 0.16, "2.3": 0.08, "2.4": 0.43, "3.1": 0.06, "3.2": 0.01, "3.3": 0.22, "3.4": 0.44, "4.1": 0.35, "4.2": 0.48, "4.3": 0.16, "4.4": 0.29, "TOTAL": 4.08}, "25366555q": {"1.1": 0.08, "1.2": 0.31, "1.3": 0.37, "2.1": 0.03, "2.2": 0.2, "2.3": 0.18, "2.4": 0.07, "3.1": 0.82, "3.2": 0.27, "3.3": 0.04, "3.4": 0.08, "4.1": 0.46, "4.2": 0.01, "4.3": 0.27, "4.4": 0.13, "TOTAL": 3.32}, "39974698p": {"1.1": 0.18, "1.2": 0.28, "1.3": 0.28, "2.1": 1.45, "2.2": 0.19, "2.3": 0.26, "2.4": 0.15, "3.1": 0.94, "3.2": 0.47, "3.3": 0.17, "3.4": 0.31, "4.1": 0.03, "4.2": 0.41, "4.3": 0.42, "4.4": 0.37, "TOTAL": 5.909999999999999}, "39986643q": {"1.1": 0.28, "1.2": 0.01, "1.3": 0.33, "2.1": 1.01, "2.2": 0.15, "2.3": 0.02, "2.4": 0.22, "3.1": 0.55, "3.2": 0.08, "3.3": 0.44, "3.4": 0.49, "4.1": 0.11, "4.2": 0.17, "4.3": 0.46, "4.4": 0.36, "TOTAL": 4.680000000000001}}, "totalMax": 10.0};
+
+    const $ = (id) => document.getElementById(id);
+
+    const viewSearch = $("view-search");
+    const viewResult = $("view-result");
+    const viewNotFound = $("view-notfound");
+
+    const idInput = $("idInput");
+    const searchForm = $("search-form");
+
+    const maxTotalEl = $("max-total");
+    maxTotalEl.textContent = fmt(DATA.totalMax, 2);
+
+    function fmt(n, d=2){
+      const x = (typeof n === "number") ? n : Number(n || 0);
+      return x.toFixed(d);
+    }
+
+    function show(which){
+      viewSearch.classList.add("hidden");
+      viewResult.classList.add("hidden");
+      viewNotFound.classList.add("hidden");
+      which.classList.remove("hidden");
+      // small UX: scroll to top
+      window.scrollTo({top:0, behavior:"smooth"});
+    }
+
+    function normalizeId(raw){
+      return String(raw || "").trim().toLowerCase();
+    }
+
+    function computeTotals(rec){
+      const probs = DATA.problemGroups;
+      const maxProb = DATA.maxProblem;
+
+      const out = {
+        perProblem: {}, // p -> sum
+        total: 0
+      };
+
+      for (const p of Object.keys(probs)){
+        const parts = probs[p];
+        let s = 0;
+        for (const part of parts){
+          s += Number(rec[part] || 0);
+        }
+        out.perProblem[p] = s;
+        out.total += s;
+      }
+      return out;
+    }
+
+    function statusFor(total){
+      // Criteri habitual: aprovat >= 5.0 sobre 10
+      return total >= 5 ? "aprobado" : "suspenso";
+    }
+
+    function renderStudent(idNorm){
+      const rec = DATA.students[idNorm];
+      if (!rec) return false;
+
+      const totals = computeTotals(rec);
+      const total = totals.total;
+
+      $("student-title").textContent = "Estudiant: " + idNorm;
+      $("kpi-total").textContent = fmt(total, 2) + " / " + fmt(DATA.totalMax, 2);
+      const st = statusFor(total);
+      $("kpi-status").textContent = st;
+
+      const gradePill = $("grade-pill");
+      gradePill.textContent = "Nota: " + fmt(total, 2) + " (" + st + ")";
+      gradePill.classList.remove("good","bad");
+      gradePill.classList.add(st === "aprobado" ? "good" : "bad");
+
+      // Build breakdown rows
+      const tbody = $("breakdown-body");
+      tbody.innerHTML = "";
+
+      // Problem summary rows + subparts
+      const probs = DATA.problemGroups;
+      const maxByCol = DATA.maxByCol;
+      const maxProblem = DATA.maxProblem;
+
+      for (const p of Object.keys(probs)){
+        const pMax = Number(maxProblem[p] || 0);
+        const pGot = Number(totals.perProblem[p] || 0);
+
+        // Problem row
+        tbody.appendChild(rowEl(
+          "Problema " + p,
+          pMax,
+          pGot,
+          true
+        ));
+
+        // Subpart rows
+        for (const part of probs[p]){
+          const mx = Number(maxByCol[part] || 0);
+          const got = Number(rec[part] || 0);
+          tbody.appendChild(rowEl(
+            part,
+            mx,
+            got,
+            false
+          ));
+        }
+      }
+
+      return true;
+    }
+
+    function rowEl(label, mx, got, isHeader){
+      const tr = document.createElement("tr");
+      const td1 = document.createElement("td");
+      const td2 = document.createElement("td");
+      const td3 = document.createElement("td");
+
+      td1.textContent = label;
+      td2.textContent = fmt(mx, 2);
+      td3.textContent = fmt(got, 2);
+
+      td2.className = "right muted";
+      td3.className = "right";
+
+      if (isHeader){
+        td1.style.fontWeight = "850";
+        td1.style.background = "rgba(255,255,255,0.03)";
+        td2.style.background = "rgba(255,255,255,0.03)";
+        td3.style.background = "rgba(255,255,255,0.03)";
+      } else {
+        td1.style.paddingLeft = "22px";
+        td1.style.color = "rgba(233,242,255,0.92)";
+      }
+
+      tr.appendChild(td1);
+      tr.appendChild(td2);
+      tr.appendChild(td3);
+      return tr;
+    }
+
+    searchForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const idNorm = normalizeId(idInput.value);
+      if (!idNorm) return;
+
+      const ok = renderStudent(idNorm);
+      if (ok){
+        show(viewResult);
+      } else {
+        show(viewNotFound);
+      }
+    });
+
+    function reset(){
+      idInput.value = "";
+      show(viewSearch);
+      idInput.focus();
+    }
+
+    $("new-search").addEventListener("click", reset);
+    $("new-search-2").addEventListener("click", reset);
+
+    // Autofocus on load
+    window.addEventListener("load", () => idInput.focus());
+  </script>
+</body>
+</html>
